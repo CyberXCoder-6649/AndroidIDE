@@ -17,23 +17,29 @@
 
 package com.itsaky.androidide.editor.ui
 
-import io.github.rosemoe.sora.widget.CodeEditor
-import io.github.rosemoe.sora.widget.base.EditorPopupWindow
+import android.os.Handler
+import io.github.rosemoe.sora.lang.completion.CompletionItem
+import io.github.rosemoe.sora.lang.completion.CompletionPublisher
 
 /**
- * Abstract class for all [IDEEditor] popup windows.
+ * [CompletionPublisher] implementation for AndroidIDE.
  *
  * @author Akash Yadav
  */
-abstract class AbstractPopupWindow(editor: CodeEditor, features: Int) :
-  EditorPopupWindow(editor, features) {
-  override fun show() {
-    (editor as? IDEEditor)?.ensureWindowsDismissed()
-    super.show()
+class IDECompletionPublisher(
+  handler: Handler,
+  callback: Runnable,
+  languageInterruptionLevel: Int
+) : CompletionPublisher(handler, callback, languageInterruptionLevel) {
+
+  init {
+    setUpdateThreshold(1)
   }
 
-  override fun isShowing(): Boolean {
-    @Suppress("UNNECESSARY_SAFE_CALL", "USELESS_ELVIS")
-    return popup?.isShowing ?: false
+  /**
+   * Adds the given [completion items][items] to the completion list.
+   */
+  fun <CompletionItemT : CompletionItem> addLSPItems(items: Collection<CompletionItemT>) {
+    super.addItems(items)
   }
 }

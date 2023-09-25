@@ -33,7 +33,8 @@ class InstallAPKAction(context: Context, override val order: Int) : EditorActivi
   override val id: String = "editor_install_apk"
 
   init {
-    label = context.getString(R.string.msg_install_apk)
+    label = context.getString(R.string.title_install_apk)
+    // Disabled as no icon is currently there
    // icon = ContextCompat.getDrawable(context, R.drawable.ic_folder)
   }
 
@@ -44,22 +45,10 @@ class InstallAPKAction(context: Context, override val order: Int) : EditorActivi
 
   override fun execAction(data: ActionData): Boolean {
     val context = data.getActivity() ?: return false
-
-    context.binding.root.apply {
-      if (!isDrawerOpen(GravityCompat.START)) {
-        openDrawer(GravityCompat.START)
-        return true
-      }
-    }
-
     return false
   }
 
   override fun getShowAsActionFlags(data: ActionData): Int {
-    return if (hideFileTreeButton) {
-      MenuItem.SHOW_AS_ACTION_NEVER
-    } else {
-      MenuItem.SHOW_AS_ACTION_IF_ROOM
-    }
+    return MenuItem.SHOW_AS_ACTION_NEVER
   }
 }

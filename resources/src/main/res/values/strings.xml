@@ -401,7 +401,8 @@
   <string name="msg_installing_apk">Installing APK...</string>
   <string name="msg_installed_successfully">Installed successfully</string>
   <string name="msg_action_open_application">Do you want to open the application?</string>
-
+  <string name="title_install_apk">Install APK</string>
+  
   <string name="title_gradle_service_notification_channel">AndroidIDE Gradle build service</string>
   <string name="msg_hex_color_code">Hex color code</string>
   <string name="msg_color_picker_pick">Pick</string>
